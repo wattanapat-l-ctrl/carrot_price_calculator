@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เครื่องคิดเงินสินค้าเกษตร 🥕🥬</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+        }
+        /* Hide arrows on number inputs for cleaner UI */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        /* Custom scrollbar for better look on overflowing content */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-orange-50 via-gray-50 to-green-50 min-h-screen flex items-center justify-center p-4 sm:p-8">
+
+    <div class="bg-white rounded-3xl shadow-xl w-full max-w-4xl overflow-hidden border border-gray-100 flex flex-col">
+        
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-orange-400 via-yellow-500 to-green-500 p-6 sm:p-8 text-center relative overflow-hidden">
+            <div class="relative z-10">
+                <h1 class="text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-md">
+                    ฟาร์มเกษตร 🥕🥬
+                </h1>
+                <p class="text-white/90 text-sm sm:text-base font-medium">ระบบคำนวณราคาสินค้าอัตโนมัติ</p>
+            </div>
+            <!-- Decorative background elements -->
+            <div class="absolute -top-10 -left-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white opacity-10 rounded-full blur-2xl"></div>
+        </div>
+
+        <div class="p-6 md:p-8 flex-grow">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- 🥕 Carrot Section (Orange Theme) -->
+                <div class="space-y-5 bg-orange-50/50 p-6 rounded-2xl border border-orange-100">
+                    <h2 class="text-xl font-bold text-orange-600 flex items-center gap-2 border-b border-orange-200 pb-3">
+                        <span>🥕</span> แครอท
+                    </h2>
+                    
+                    <!-- Carrot N -->
+                    <div class="space-y-1">
+                        <label class="flex justify-between items-center text-gray-700 font-medium">
+                            <span class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-orange-300"></span> แครอท N
+                            </span>
+                            <span class="text-xs text-gray-500 bg-white px-2 py-1 rounded-md border border-gray-100 shadow-sm">4,500 ฿/ชิ้น</span>
+                        </label>
+                        <div class="flex items-center gap-3">
+                            <input type="number" id="qtyCarrotN" min="0" placeholder="0" 
+                                class="w-full px-4 py-2.5 rounded-xl border border-orange-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all text-gray-800 bg-white text-right placeholder-gray-300 shadow-sm">
+                        </div>
+                        <div class="text-right text-sm">
+                            <span class="text-gray-400 text-xs">รวมรายการนี้:</span> <span id="subCarrotN" class="text-orange-600 font-semibold">0</span> <span class="text-gray-500 text-xs">฿</span>
+                        </div>
+                    </div>
+
+                    <!-- Carrot R -->
+                    <div class="space-y-1">
+                        <label class="flex justify-between items-center text-gray-700 font-medium">
+                            <span class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-orange-400"></span> แครอท R
+                            </span>
+                            <span class="text-xs text-gray-500 bg-white px-2 py-1 rounded-md border border-gray-100 shadow-sm">5,500 ฿/ชิ้น</span>
+                        </label>
+                        <div class="flex items-center gap-3">
+                            <input type="number" id="qtyCarrotR" min="0" placeholder="0" 
+                                class="w-full px-4 py-2.5 rounded-xl border border-orange-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all text-gray-800 bg-white text-right placeholder-gray-300 shadow-sm">
+                        </div>
+                        <div class="text-right text-sm">
+                            <span class="text-gray-400 text-xs">รวมรายการนี้:</span> <span id="subCarrotR" class="text-orange-600 font-semibold">0</span> <span class="text-gray-500 text-xs">฿</span>
+                        </div>
+                    </div>
+
+                    <!-- Carrot E -->
+                    <div class="space-y-1">
+                        <label class="flex justify-between items-center text-gray-700 font-medium">
+                            <span class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span> แครอท E
+                            </span>
+                            <span class="text-xs text-gray-500 bg-white px-2 py-1 rounded-md border border-gray-100 shadow-sm">7,500 ฿/ชิ้น</span>
+                        </label>
+                        <div class="flex items-center gap-3">
+                            <input type="number" id="qtyCarrotE" min="0" placeholder="0" 
+                                class="w-full px-4 py-2.5 rounded-xl border border-orange-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all text-gray-800 bg-white text-right placeholder-gray-300 shadow-sm">
+                        </div>
+                        <div class="text-right text-sm">
+                            <span class="text-gray-400 text-xs">รวมรายการนี้:</span> <span id="subCarrotE" class="text-orange-600 font-semibold">0</span> <span class="text-gray-500 text-xs">฿</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🥬 Cabbage Section (Green Theme) -->
+                <div class="space-y-5 bg-green-50/50 p-6 rounded-2xl border border-green-100">
+                    <h2 class="text-xl font-bold text-green-600 flex items-center gap-2 border-b border-green-200 pb-3">
+                        <span>🥬</span> ผักกาดขาว
+                    </h2>
+                    
+                    <!-- Cabbage N -->
+                    <div class="space-y-1">
+                        <label class="flex justify-between items-center text-gray-700 font-medium">
+                            <span class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-300"></span> ผักกาดขาว N
+                            </span>
+                            <span class="text-xs text-gray-500 bg-white px-2 py-1 rounded-md border border-gray-100 shadow-sm">9,500 ฿/ชิ้น</span>
+                        </label>
+                        <div class="flex items-center gap-3">
+                            <input type="number" id="qtyCabbageN" min="0" placeholder="0" 
+                                class="w-full px-4 py-2.5 rounded-xl border border-green-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all text-gray-800 bg-white text-right placeholder-gray-300 shadow-sm">
+                        </div>
+                        <div class="text-right text-sm">
+                            <span class="text-gray-400 text-xs">รวมรายการนี้:</span> <span id="subCabbageN" class="text-green-600 font-semibold">0</span> <span class="text-gray-500 text-xs">฿</span>
+                        </div>
+                    </div>
+
+                    <!-- Cabbage R -->
+                    <div class="space-y-1">
+                        <label class="flex justify-between items-center text-gray-700 font-medium">
+                            <span class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span> ผักกาดขาว R
+                            </span>
+                            <span class="text-xs text-gray-500 bg-white px-2 py-1 rounded-md border border-gray-100 shadow-sm">11,500 ฿/ชิ้น</span>
+                        </label>
+                        <div class="flex items-center gap-3">
+                            <input type="number" id="qtyCabbageR" min="0" placeholder="0" 
+                                class="w-full px-4 py-2.5 rounded-xl border border-green-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all text-gray-800 bg-white text-right placeholder-gray-300 shadow-sm">
+                        </div>
+                        <div class="text-right text-sm">
+                            <span class="text-gray-400 text-xs">รวมรายการนี้:</span> <span id="subCabbageR" class="text-green-600 font-semibold">0</span> <span class="text-gray-500 text-xs">฿</span>
+                        </div>
+                    </div>
+
+                    <!-- Cabbage E -->
+                    <div class="space-y-1">
+                        <label class="flex justify-between items-center text-gray-700 font-medium">
+                            <span class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span> ผักกาดขาว E
+                            </span>
+                            <span class="text-xs text-gray-500 bg-white px-2 py-1 rounded-md border border-gray-100 shadow-sm">16,000 ฿/ชิ้น</span>
+                        </label>
+                        <div class="flex items-center gap-3">
+                            <input type="number" id="qtyCabbageE" min="0" placeholder="0" 
+                                class="w-full px-4 py-2.5 rounded-xl border border-green-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all text-gray-800 bg-white text-right placeholder-gray-300 shadow-sm">
+                        </div>
+                        <div class="text-right text-sm">
+                            <span class="text-gray-400 text-xs">รวมรายการนี้:</span> <span id="subCabbageE" class="text-green-600 font-semibold">0</span> <span class="text-gray-500 text-xs">฿</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr class="border-gray-200 border-dashed border-2 rounded-full my-8">
+
+            <div class="flex flex-col md:flex-row gap-6 items-center">
+                <!-- Total Result Box -->
+                <div class="flex-grow w-full bg-gray-900 rounded-2xl p-6 md:p-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between shadow-lg relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 z-0"></div>
+                    <div class="relative z-10 mb-2 sm:mb-0">
+                        <p class="text-gray-400 font-medium text-sm sm:text-base uppercase tracking-wider">ยอดรวมสุทธิ (Grand Total)</p>
+                        <div class="text-4xl md:text-5xl font-bold text-white tracking-tight mt-1" id="grandTotal">
+                            0
+                        </div>
+                    </div>
+                    <div class="relative z-10 text-xl text-gray-400 font-medium bg-gray-800/50 px-4 py-2 rounded-xl backdrop-blur-sm border border-gray-700">
+                        บาท (THB)
+                    </div>
+                </div>
+
+                <!-- Reset Button -->
+                <button id="resetBtn" class="w-full md:w-auto px-8 py-6 rounded-2xl text-gray-600 font-medium bg-gray-100 border-2 border-transparent hover:border-gray-300 hover:bg-gray-200 transition-all focus:ring-4 focus:ring-gray-200 outline-none flex items-center justify-center gap-2 group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 group-hover:-rotate-180 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    <span>ล้างข้อมูล</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Prices for Carrots
+        const PRICES = {
+            carrot: {
+                N: 4500,
+                R: 5500,
+                E: 7500
+            },
+            cabbage: {
+                N: 9500,
+                R: 11500,
+                E: 16000
+            }
+        };
+
+        // DOM Elements - Inputs
+        const inputs = {
+            carrotN: document.getElementById('qtyCarrotN'),
+            carrotR: document.getElementById('qtyCarrotR'),
+            carrotE: document.getElementById('qtyCarrotE'),
+            cabbageN: document.getElementById('qtyCabbageN'),
+            cabbageR: document.getElementById('qtyCabbageR'),
+            cabbageE: document.getElementById('qtyCabbageE')
+        };
+
+        // DOM Elements - Subtotals
+        const subtotals = {
+            carrotN: document.getElementById('subCarrotN'),
+            carrotR: document.getElementById('subCarrotR'),
+            carrotE: document.getElementById('subCarrotE'),
+            cabbageN: document.getElementById('subCabbageN'),
+            cabbageR: document.getElementById('subCabbageR'),
+            cabbageE: document.getElementById('subCabbageE')
+        };
+
+        // DOM Elements - Master
+        const grandTotalDisplay = document.getElementById('grandTotal');
+        const resetBtn = document.getElementById('resetBtn');
+
+        // Helper function to format currency
+        const formatMoney = (amount) => amount.toLocaleString('th-TH');
+
+        // Main calculation function
+        function calculateAll() {
+            let grandTotal = 0;
+
+            // Calculate Carrots
+            const qtyCarrotN = Math.max(0, parseInt(inputs.carrotN.value) || 0);
+            const totalCarrotN = qtyCarrotN * PRICES.carrot.N;
+            subtotals.carrotN.textContent = formatMoney(totalCarrotN);
+            grandTotal += totalCarrotN;
+
+            const qtyCarrotR = Math.max(0, parseInt(inputs.carrotR.value) || 0);
+            const totalCarrotR = qtyCarrotR * PRICES.carrot.R;
+            subtotals.carrotR.textContent = formatMoney(totalCarrotR);
+            grandTotal += totalCarrotR;
+
+            const qtyCarrotE = Math.max(0, parseInt(inputs.carrotE.value) || 0);
+            const totalCarrotE = qtyCarrotE * PRICES.carrot.E;
+            subtotals.carrotE.textContent = formatMoney(totalCarrotE);
+            grandTotal += totalCarrotE;
+
+            // Calculate Cabbages
+            const qtyCabbageN = Math.max(0, parseInt(inputs.cabbageN.value) || 0);
+            const totalCabbageN = qtyCabbageN * PRICES.cabbage.N;
+            subtotals.cabbageN.textContent = formatMoney(totalCabbageN);
+            grandTotal += totalCabbageN;
+
+            const qtyCabbageR = Math.max(0, parseInt(inputs.cabbageR.value) || 0);
+            const totalCabbageR = qtyCabbageR * PRICES.cabbage.R;
+            subtotals.cabbageR.textContent = formatMoney(totalCabbageR);
+            grandTotal += totalCabbageR;
+
+            const qtyCabbageE = Math.max(0, parseInt(inputs.cabbageE.value) || 0);
+            const totalCabbageE = qtyCabbageE * PRICES.cabbage.E;
+            subtotals.cabbageE.textContent = formatMoney(totalCabbageE);
+            grandTotal += totalCabbageE;
+
+            // Update Grand Total with animation
+            if (grandTotalDisplay.textContent !== formatMoney(grandTotal)) {
+                grandTotalDisplay.textContent = formatMoney(grandTotal);
+                grandTotalDisplay.classList.add('scale-105', 'text-yellow-400');
+                setTimeout(() => {
+                    grandTotalDisplay.classList.remove('scale-105', 'text-yellow-400');
+                }, 150);
+            }
+        }
+
+        // Add event listeners to all inputs
+        Object.values(inputs).forEach(input => {
+            input.addEventListener('input', calculateAll);
+        });
+
+        // Reset button logic
+        resetBtn.addEventListener('click', () => {
+            // Clear inputs
+            Object.values(inputs).forEach(input => {
+                input.value = '';
+            });
+            // Recalculate (will set everything to 0)
+            calculateAll();
+            // Focus on first input
+            inputs.carrotN.focus();
+        });
+
+        // Add CSS transition for the grand total animation
+        grandTotalDisplay.style.transition = 'all 0.15s ease-out';
+        
+    </script>
+</body>
+</html>
